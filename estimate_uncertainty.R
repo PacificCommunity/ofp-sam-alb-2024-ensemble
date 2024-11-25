@@ -74,12 +74,12 @@ reffunc <- function(rep_list){
     sblatest_sbf0 <- c(SBSBF0latest(rep)[,c(year)])
     # SBlatest / SBMSY
     sblatest_sbmsy <- sblatest / sbmsy
-    
+
     # SBrecent / SBF=0
     sbrecent_sbf0 <- c(SBSBF0recent(rep)[,c(year)])
     # SBrecent / SBMSY
     sbrecent_sbmsy <- c(SBrecent(rep)[,year]) / sbmsy
-    
+
     outtemp <- data.frame(model=model, msy=msy, fmult=fmult,
                           fmsy=fmsy, frecent_fmsy = frecent_fmsy, sbmsy=sbmsy,
                           sb0=sb0, sbmsy_sb0 = sbmsy_sb0, sbf0=sbf0,
@@ -88,7 +88,7 @@ reffunc <- function(rep_list){
                           sblatest_sbmsy=sblatest_sbmsy,
                           sbrecent_sbf0 = sbrecent_sbf0,
                           sbrecent_sbmsy=sbrecent_sbmsy)
-    
+
     refpts <- rbind(refpts, outtemp)
   }
   return(refpts)
