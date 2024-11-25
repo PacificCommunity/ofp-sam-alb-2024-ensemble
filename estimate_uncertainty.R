@@ -1,7 +1,4 @@
-## This Rcode calculates the ref points and 95% CIs from the ensemble models for
-## Steven's TFAR work
-
-rm(list=ls())
+## Calculate ref points and 95% CIs from ensemble models for TFAR
 
 library(ggplot2)
 library(dplyr)
@@ -14,38 +11,30 @@ library(diags4MFCL)
 library(magrittr)
 library(data.table)
 
-setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
+# Read files from previous steps
+results <- read.csv("Results/results_2024-08-07.csv")
+simulations <- "Simulations/diag-north.WCPO.idx"
+model_set <- dir(simulations)
 
-## read in the results from the simulations
-NZ.troll.threshold <- -120
-results <- read.csv(file = "../Diagnostics/Results/results_2024-08-07.csv")
-bad.mods <- results %>% filter(LF.NZ.troll.Samp.14.16 >= NZ.troll.threshold |
-                                 negvals != 0)
-results %<>% filter(LF.NZ.troll.Samp.14.16 < NZ.troll.threshold & negvals == 0)
+# Filter based on NZ troll fishery
+# NZ.troll.threshold <- -120
+# bad.mods <- results %>% filter(LF.NZ.troll.Samp.14.16 >= NZ.troll.threshold |
+#                                negvals != 0)
+# results %<>% filter(LF.NZ.troll.Samp.14.16 < NZ.troll.threshold & negvals == 0)
 
-model_main_folder <-  "C:/StockAssessment/Albacore/2024/ensemble_models/Simulations/diag-north.WCPO.idx/"
-
-# Check length is correct and make some names from the folder names
-model_set <- c(as.character(seq(1, 100, 1)))
+# Construct rep_list
 rep_list <- list()
-
 for (model in model_set){
-  cat("Processing model data for: ", model, "\n")
-  rep_no <- "09"
-  rep <- read.MFCLRep(paste(model_main_folder, model, "/plot-",rep_no,
-                            ".par.rep", sep=""))
+  message("Processing model data for: ", model)
+  rep <- read.MFCLRep(finalRep(file.path(simulations, model)))
   rep_list[[model]] <- rep
 }
 
 year <- "2022"
-load(file = "fishery_map.Rdata")
-
 reffunc <- function(rep_list){
   refpts <- data.frame()
   for(model in model_set){
     rep <- rep_list[[model]]
-    areas <- as.numeric(dimnames(adultBiomass(rep))$area)
-    fisheries <- fishery_map[fishery_map$region %in% areas, "fishery"]
     # MSY by year (individual values are per quarter)
     msy <- MSY(rep)*4
     # fmultiplier at FMSY
@@ -74,7 +63,6 @@ reffunc <- function(rep_list){
     sblatest_sbf0 <- c(SBSBF0latest(rep)[,c(year)])
     # SBlatest / SBMSY
     sblatest_sbmsy <- sblatest / sbmsy
-
     # SBrecent / SBF=0
     sbrecent_sbf0 <- c(SBSBF0recent(rep)[,c(year)])
     # SBrecent / SBMSY
