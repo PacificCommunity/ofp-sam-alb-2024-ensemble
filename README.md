@@ -19,7 +19,7 @@ The SPALB 2024 assessment uncertainty was estimated using a Monte Carlo model en
 
 ## Ensemble results
 
-The [alb-2024-ensemble-results.zip](https://github.com/PacificCommunity/ofp-sam-alb-2024-ensemble/releases/download/file/alb-2024-ensemble-results.zip) file contains all files necessary to run or browse the SPALB 2024 ensemble.
+This repository contains all files necessary to run or browse the SPALB 2024 ensemble.
 
 The ensemble models are run from a par file, as described in the corresponding `doitall.sh` script.
 
@@ -29,7 +29,8 @@ The final par and rep files are consistently named `09.par` and `plot-09.par.rep
 
 See also Section 8, Section 10.6 and Table 9 in the SPALB 2024 stock assessment [report](https://meetings.wcpfc.int/node/23119).
 
-The script requires the FLR and FLR4MFCL packages:
+The `estimate_uncertainty.R` script requires two R packages that are available on GitHub:
+
 ```
 install_github("flr/FLCore")
 install_github("PacificCommunity/FLR4MFCL")
