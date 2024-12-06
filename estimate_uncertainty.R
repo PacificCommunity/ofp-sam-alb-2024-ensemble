@@ -1,15 +1,8 @@
 ## Calculate ref points and 95% CIs from ensemble models for TFAR
 
-library(ggplot2)
 library(dplyr)
-library(reshape2)
-library(gridExtra)
-library(tidyr)
-library(diags4MFCL)
 library(FLR4MFCL)
-library(diags4MFCL)
 library(magrittr)
-library(data.table)
 
 # Read files from previous steps
 results <- read.csv("Results/results_2024-08-07.csv")
@@ -17,10 +10,10 @@ simulations <- "Simulations/diag-north.WCPO.idx"
 model_set <- dir(simulations)
 
 # Filter based on NZ troll fishery
-# NZ.troll.threshold <- -120
-# bad.mods <- results %>% filter(LF.NZ.troll.Samp.14.16 >= NZ.troll.threshold |
-#                                negvals != 0)
-# results %<>% filter(LF.NZ.troll.Samp.14.16 < NZ.troll.threshold & negvals == 0)
+NZ.troll.threshold <- -120
+bad.mods <- results %>% filter(LF.NZ.troll.Samp.14.16 >= NZ.troll.threshold |
+                               negvals != 0)
+results %<>% filter(LF.NZ.troll.Samp.14.16 < NZ.troll.threshold & negvals == 0)
 
 # Construct rep_list
 rep_list <- list()
@@ -69,12 +62,12 @@ reffunc <- function(rep_list){
     sbrecent_sbmsy <- c(SBrecent(rep)[,year]) / sbmsy
 
     outtemp <- data.frame(model=model, msy=msy, fmult=fmult,
-                          fmsy=fmsy, frecent_fmsy = frecent_fmsy, sbmsy=sbmsy,
-                          sb0=sb0, sbmsy_sb0 = sbmsy_sb0, sbf0=sbf0,
+                          fmsy=fmsy, frecent_fmsy=frecent_fmsy, sbmsy=sbmsy,
+                          sb0=sb0, sbmsy_sb0=sbmsy_sb0, sbf0=sbf0,
                           sbmsy_sbf0=sbmsy_sbf0, sblatest_sb0=sblatest_sb0,
                           sblatest_sbf0=sblatest_sbf0,
                           sblatest_sbmsy=sblatest_sbmsy,
-                          sbrecent_sbf0 = sbrecent_sbf0,
+                          sbrecent_sbf0=sbrecent_sbf0,
                           sbrecent_sbmsy=sbrecent_sbmsy)
 
     refpts <- rbind(refpts, outtemp)
@@ -84,7 +77,7 @@ reffunc <- function(rep_list){
 
 refptsall <- reffunc(rep_list)
 
-## combine refpts with and without estimation error
+## Combine refpts with and without estimation error
 final.df <- refptsall %>% select(model, SBrec.SBF0 = sbrecent_sbf0,
                                  SBrec.SBmsy = sbrecent_sbmsy,
                                  Frec.Fmsy = frecent_fmsy) %>%
@@ -103,5 +96,4 @@ final.df <- refptsall %>% select(model, SBrec.SBF0 = sbrecent_sbf0,
                      SBrec.SBmsy.new, SBrec.SBmsy.new.min, SBrec.SBmsy.new.max,
                      Frec.Fmsy.new, Frec.Fmsy.new.min, Frec.Fmsy.new.max))
 
-write.csv(final.df, file = "../ALB.2024.model.ensemble.outcomes.csv",
-          row.names = F)
+write.csv(final.df, "ALB.2024.model.ensemble.outcomes.csv", row.names = FALSE)
