@@ -27,7 +27,7 @@ The final par and rep files are consistently named `09.par` and `plot-09.par.rep
 
 ## Estimating uncertainty
 
-See also Section 8, Section 10.6 and Table 9 in the SPALB 2024 stock assessment [report](https://meetings.wcpfc.int/node/23119).
+See also Section 8, Section 10.6 and Table 9 in the SPALB 2024 stock assessment report.
 
 The `estimate_uncertainty.R` script requires two R packages that are available on GitHub:
 
