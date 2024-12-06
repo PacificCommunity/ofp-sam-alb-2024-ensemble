@@ -96,4 +96,13 @@ final.df <- refptsall %>% select(model, SBrec.SBF0 = sbrecent_sbf0,
                      SBrec.SBmsy.new, SBrec.SBmsy.new.min, SBrec.SBmsy.new.max,
                      Frec.Fmsy.new, Frec.Fmsy.new.min, Frec.Fmsy.new.max))
 
+points <- function(x)
+{
+  c(mean=mean(x), median=median(x), min=min(x), quantile(x,c(0.1,0.9)), max=max(x))
+}
+
+## Calculate mean and quantiles
+t(round(sapply(refptsall[-1], points), 2))
+t(round(sapply(final.df[-1], points), 2))
+
 write.csv(final.df, "ALB.2024.model.ensemble.outcomes.csv", row.names = FALSE)
