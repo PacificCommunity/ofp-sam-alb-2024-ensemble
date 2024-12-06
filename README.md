@@ -2,7 +2,7 @@
 
 Download ALB 2024 assessment report:
 
-- **Stock assessment of South Pacific albacore tuna in the western and central Pacific Ocean: 2024**\
+- **Stock Assessment of South Pacific Albacore: 2024**\
   **[WCPFC-SC20-2024/SA-WP-02](https://meetings.wcpfc.int/node/23119)**
 
 Download ALB 2024 diagnostic model:
