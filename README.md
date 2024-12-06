@@ -11,12 +11,11 @@ Download SPALB 2024 diagnostic model:
 
 Download SPALB 2024 ensemble results:
 
-- The **[alb-2024-ensemble](https://github.com/PacificCommunity/ofp-sam-alb-2024-ensemble)** repository includes a **[alb-2024-ensemble-results.zip](https://github.com/PacificCommunity/ofp-sam-alb-2024-ensemble/releases/download/file/alb-2024-ensemble-results.zip)** file
+- Clone the **[alb-2024-ensemble](https://github.com/PacificCommunity/ofp-sam-alb-2024-ensemble)** repository or download as **[main.zip](https://github.com/PacificCommunity/ofp-sam-alb-2024-ensemble/archive/refs/heads/main.zip)** file
 
 ## Uncertainty
 
-The SPALB 2024 assessment uncertainty was estimated using a Monte Carlo model ensemble approach in which 100 models incorporated uncertainty in average natural mortality, stock-recruitment steepness and
-estimation error for individual models:
+The SPALB 2024 assessment uncertainty was estimated using a Monte Carlo model ensemble approach in which 100 models incorporated uncertainty in average natural mortality, stock-recruitment steepness and estimation error for individual models:
 
 ## Ensemble results
 
