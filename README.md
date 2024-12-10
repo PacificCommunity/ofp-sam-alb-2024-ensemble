@@ -1,4 +1,4 @@
-# ALB 2024 Ensemble
+# ALB 2024 Model Ensemble
 
 Download ALB 2024 assessment report:
 
